@@ -17,3 +17,7 @@ http://localhost:9977
 Manual refresh
 
 curl -X POST http://localhost:9977/actuator/refresh
+
+
+# Ref
+* https://datmt.com/backend/java/spring/spring-cloud-config-server-complete-guide/
