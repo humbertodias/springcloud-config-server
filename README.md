@@ -4,12 +4,6 @@ docker-compose up
 
 # Config Server
 
-http://localhost:9988/cook-service/default
-
-http://localhost:9988/cook-service/dev
-
-http://localhost:9988/cook-service/prod
-
 http://localhost:9988/cook-service/docker
 
 # Eureka server
@@ -19,9 +13,17 @@ http://localhost:9922
 
 # Cook Service
 
+Current count
+
 http://localhost:4000
 
 Manual refresh
+
+edit 
+
+config-server/src/main/resources/config/cook-service-docker.properties
+
+then refresh
 
 curl -X POST http://localhost:4000/actuator/refresh
 
