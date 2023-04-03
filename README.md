@@ -28,6 +28,16 @@ then refresh
 curl -X POST http://localhost:4000/actuator/refresh
 
 
+# Bus config
+
+RabbitMQ
+
+http://localhost:15672/
+
+admin
+
+admin
+
 # Ref
 
 * [Config Server](https://datmt.com/backend/java/spring/spring-cloud-config-server-complete-guide/)

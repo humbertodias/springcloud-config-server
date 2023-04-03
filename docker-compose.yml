@@ -10,13 +10,29 @@ services:
     ports:
       - "9922:9922"
 
+  rabbitmq:
+    build:
+      context: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    restart: always
+    ports:
+      # AMQP protocol port
+      - "5672:5672"
+      # HTTP management UI
+      - "15672:15672"
+
   config-server:
     build:
       context: config-server
     environment:
       - SPRING_PROFILES_ACTIVE=native,docker
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
     depends_on:
       - "eureka-server"
+      - "rabbitmq"
     volumes:
       - ./config-server/src/main/resources/config:/app/config
     ports:
@@ -30,9 +46,12 @@ services:
       replicas: 2
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
     depends_on:
       - "eureka-server"
       - "config-server"
+      - "rabbitmq"
 
   nginx:
     image: nginx:latest
