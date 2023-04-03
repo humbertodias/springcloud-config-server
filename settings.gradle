@@ -1,0 +1,5 @@
+rootProject.name = 'config-server-multi-module'
+
+include 'config-server'
+include 'eureka-server'
+include 'cook-service'

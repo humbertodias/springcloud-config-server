@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+
+  eureka-server:
+    build:
+      context: eureka-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "9922:9922"
+
+  config-server:
+    build:
+      context: config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=native,docker
+    links:
+      - "eureka-server"
+    volumes:
+      - ./config-server/src/main/resources/config:/app/config
+    ports:
+      - "9988:9988"
+
+  cook-service:
+    build:
+      context: cook-service
+    restart: on-failure
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    links:
+      - "eureka-server"
+      - "config-server"
+    ports:
+      - "9977:9977"

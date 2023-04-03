@@ -1,0 +1,6 @@
+eureka:
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+server:
+  port: 9922
