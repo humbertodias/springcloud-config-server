@@ -15,7 +15,7 @@ services:
       context: config-server
     environment:
       - SPRING_PROFILES_ACTIVE=native,docker
-    links:
+    depends_on:
       - "eureka-server"
     volumes:
       - ./config-server/src/main/resources/config:/app/config
@@ -26,10 +26,19 @@ services:
     build:
       context: cook-service
     restart: on-failure
+    deploy:
+      replicas: 2
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-    links:
+    depends_on:
       - "eureka-server"
       - "config-server"
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - "cook-service"
     ports:
-      - "9977:9977"
+      - "4000:4000"

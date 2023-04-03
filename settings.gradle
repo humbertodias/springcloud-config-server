@@ -1,4 +1,4 @@
-rootProject.name = 'config-server-multi-module'
+rootProject.name = 'springcloud-config-server'
 
 include 'config-server'
 include 'eureka-server'
