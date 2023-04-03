@@ -1,6 +1,8 @@
 # Docker
 
-docker-compose up
+./gradlew build
+
+docker compose up
 
 # Config Server
 
@@ -37,6 +39,11 @@ http://localhost:15672/
 admin
 
 admin
+
+Bus refresh
+
+curl -X POST http://localhost:4000/actuator/bus-refresh
+
 
 # Ref
 
