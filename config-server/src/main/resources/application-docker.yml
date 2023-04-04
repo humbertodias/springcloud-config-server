@@ -1,0 +1,31 @@
+server:
+    port: 9988
+spring:
+    application:
+        name: config-server
+    cloud:
+        config:
+            server:
+                native:
+                    search-locations: /app/config
+    rabbitmq:
+        host: rabbitmq
+        password: ${RABBITMQ_DEFAULT_PASS}
+        port: 5672
+        username: ${RABBITMQ_DEFAULT_USER}
+
+management:
+    endpoints:
+        web:
+            base-path: /actuator
+            exposure:
+                include: [ "health", "prometheus", "metrics", "info" ]
+    endpoint:
+        health:
+            show-details: always
+            rabbit:
+                enabled: true
+        metrics:
+            enabled: true
+        prometheus:
+            enabled: true

@@ -1,8 +1,22 @@
 eureka:
+  instance:
+    hostname: localhost
   client:
     fetchRegistry: false
     registerWithEureka: false
-  instance:
-    hostname: localhost
 server:
   port: 9922
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: [ "health", "prometheus", "metrics", "info" ]
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true

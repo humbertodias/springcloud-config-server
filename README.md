@@ -46,6 +46,19 @@ Metrics
 
 http://localhost:15692/metrics
 
+# Prometheus
+
+http://localhost:9090/targets
+
+# Grafana
+
+http://localhost:3000
+
+admin
+
+admin
+
+
 # Ref
 
 * [Config Server](https://datmt.com/backend/java/spring/spring-cloud-config-server-complete-guide/)
