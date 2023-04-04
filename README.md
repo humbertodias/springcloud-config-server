@@ -12,7 +12,6 @@ http://localhost:9988/cook-service/docker
 
 http://localhost:9922
 
-
 # Cook Service
 
 Current count
@@ -29,7 +28,6 @@ then refresh
 
 curl -X POST http://localhost:4000/actuator/refresh
 
-
 # Bus config
 
 RabbitMQ
@@ -42,8 +40,7 @@ admin
 
 Bus refresh
 
-curl -X POST http://localhost:4000/actuator/bus-refresh
-
+curl -X POST http://localhost:4000/actuator/busrefresh
 
 # Ref
 

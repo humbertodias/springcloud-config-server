@@ -4,10 +4,15 @@ FROM rabbitmq:3-management
 ENV RABBITMQ_DEFAULT_USER admin
 ENV RABBITMQ_DEFAULT_PASS admin
 
+RUN apt update -y && apt -y install curl
+
 ADD init.sh /init.sh
 RUN chmod +x /init.sh
 
-EXPOSE 5672 15672
+# AMQP protocol port
+EXPOSE 5672
+# HTTP management UI
+EXPOSE 15672
 
 # Define default command
 CMD ["/init.sh"]

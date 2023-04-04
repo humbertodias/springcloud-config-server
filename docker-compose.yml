@@ -18,14 +18,20 @@ services:
       - RABBITMQ_DEFAULT_PASS=admin
     restart: always
     ports:
-      # AMQP protocol port
       - "5672:5672"
-      # HTTP management UI
       - "15672:15672"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      #test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      #test: ["CMD", "rabbitmq-diagnostics", "check_running"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   config-server:
     build:
       context: config-server
+    restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=native,docker
       - RABBITMQ_DEFAULT_USER=admin
@@ -41,7 +47,7 @@ services:
   cook-service:
     build:
       context: cook-service
-    restart: on-failure
+    restart: always
     deploy:
       replicas: 2
     environment:
