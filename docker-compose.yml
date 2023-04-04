@@ -20,13 +20,6 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:15672"]
-      #test: ["CMD", "rabbitmq-diagnostics", "ping"]
-      #test: ["CMD", "rabbitmq-diagnostics", "check_running"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
 
   config-server:
     build:
@@ -37,8 +30,10 @@ services:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
     depends_on:
-      - "eureka-server"
-      - "rabbitmq"
+      eureka-server:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     volumes:
       - ./config-server/src/main/resources/config:/app/config
     ports:
@@ -55,9 +50,12 @@ services:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
     depends_on:
-      - "eureka-server"
-      - "config-server"
-      - "rabbitmq"
+      eureka-server:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
   nginx:
     image: nginx:latest

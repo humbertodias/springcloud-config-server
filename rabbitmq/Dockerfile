@@ -14,5 +14,7 @@ EXPOSE 5672
 # HTTP management UI
 EXPOSE 15672
 
+HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD rabbitmq-diagnostics check_port_connectivity
+
 # Define default command
 CMD ["/init.sh"]
