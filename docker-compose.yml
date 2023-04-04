@@ -70,8 +70,7 @@ services:
   nginx-exporter:
     image: nginx/nginx-prometheus-exporter
     command:
-      - -nginx.scrape-uri
-      - http://nginx:4000/metrics
+      - '-nginx.scrape-uri=http://nginx:4000/metrics'
     ports:
       - "9113:9113"
     depends_on:

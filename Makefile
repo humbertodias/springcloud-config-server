@@ -9,4 +9,4 @@ down:
 
 clean:
 	./gradlew clean
-	docker compose rm -v -f
+	docker compose rm -s -v -f
