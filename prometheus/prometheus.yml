@@ -6,8 +6,8 @@ global:
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
-  external_labels:
-    monitor: 'my-project'
+#  external_labels:
+#    monitor: 'my-project'
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
@@ -26,9 +26,9 @@ scrape_configs:
 
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
+    static_configs:
+      - targets: ['prometheus:9090']
 
-#    static_configs:
-#      - targets: ['config-server:9988','cook-service:9977', 'eureka-server:9922', 'rabbitmq:15692']
 
   - job_name: 'config-server'
     metrics_path: '/actuator/prometheus'
@@ -53,3 +53,9 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: [ 'rabbitmq:15692' ]
+
+  - job_name: 'nginx-exporter'
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+    static_configs:
+      - targets: [ 'nginx-exporter:9113' ]
