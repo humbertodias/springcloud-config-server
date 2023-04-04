@@ -42,6 +42,10 @@ Bus refresh
 
 curl -X POST http://localhost:4000/actuator/busrefresh
 
+Metrics
+
+http://localhost:15692/metrics
+
 # Ref
 
 * [Config Server](https://datmt.com/backend/java/spring/spring-cloud-config-server-complete-guide/)

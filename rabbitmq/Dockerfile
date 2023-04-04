@@ -13,8 +13,13 @@ RUN chmod +x /init.sh
 EXPOSE 5672
 # HTTP management UI
 EXPOSE 15672
+# HTTP prometheus
+EXPOSE 15692
 
-HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD rabbitmq-diagnostics check_port_connectivity
+HEALTHCHECK --interval=10s --timeout=3s --retries=1 CMD rabbitmq-diagnostics check_port_connectivity
+
+# Plugins
+RUN rabbitmq-plugins enable rabbitmq_prometheus
 
 # Define default command
 CMD ["/init.sh"]

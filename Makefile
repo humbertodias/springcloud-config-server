@@ -1,7 +1,4 @@
-build-jar:
-	./gradlew build
-
-build-docker:
+build:
 	docker compose build
 
 up:
