@@ -5,6 +5,7 @@ services:
   eureka-server:
     build:
       context: eureka-server
+    restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
@@ -13,10 +14,10 @@ services:
   rabbitmq:
     build:
       context: rabbitmq
+    restart: always
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
-    restart: always
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -61,6 +62,7 @@ services:
   nginx:
     build:
       context: nginx
+    restart: always
     depends_on:
       cook-service:
         condition: service_healthy
@@ -69,6 +71,7 @@ services:
 
   nginx-exporter:
     image: nginx/nginx-prometheus-exporter
+    restart: always
     command:
       - '-nginx.scrape-uri=http://nginx:4000/metrics'
     ports:
