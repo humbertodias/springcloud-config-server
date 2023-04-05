@@ -1,8 +1,6 @@
 # Docker
 
-./gradlew build
-
-docker compose up
+docker compose up -d
 
 # Config Server
 
