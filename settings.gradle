@@ -1,4 +1,4 @@
-rootProject.name = 'springcloud-config-server'
+rootProject.name = 'springcloud-config-server-eureka'
 
 include 'config-server'
 include 'eureka-server'
