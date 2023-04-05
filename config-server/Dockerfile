@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . .
 RUN gradle clean build
 
-FROM amazoncorretto:17-alpine as runtime
+FROM amazoncorretto:17 as runtime
 RUN mkdir /app
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar /app/config-server.jar
