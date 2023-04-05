@@ -9,5 +9,5 @@ WORKDIR /app
 COPY --from=build /app/build/libs/*.jar /app/cook-service.jar
 VOLUME /app/config
 EXPOSE 9977
-HEALTHCHECK CMD wget -q --no-verbose --tries=1 -O - http://localhost:9977/actuator/health/ping | grep UP || exit 1
+HEALTHCHECK CMD curl --silent --fail --request GET http://localhost:9977/actuator/health/ping | grep UP || exit 1
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/cook-service.jar"]

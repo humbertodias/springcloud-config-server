@@ -9,5 +9,5 @@ WORKDIR /app
 COPY --from=build /app/build/libs/*.jar /app/config-server.jar
 VOLUME /app/config
 EXPOSE 9988
-HEALTHCHECK CMD wget -q --no-verbose --tries=1 -O - http://localhost:9988/actuator/health/ping | grep UP || exit 1
+HEALTHCHECK CMD curl --silent --fail --request GET http://localhost:9988/actuator/health/ping | grep UP || exit 1
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/config-server.jar"]
